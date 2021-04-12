@@ -1,15 +1,19 @@
-class Iteration:
+class BoxIteration:
+    class IterImpl:
+        def __init__(self, data: str):
+            self.data = data
+            self.n = 0
+
+        def __next__(self):
+            if self.n < len(self.data):
+                ch = self.data[self.n]
+                self.n += 1
+                return ch
+            else:
+                raise StopIteration
+
+    def __init__(self, data: str):
+        self.container = data
+
     def __iter__(self):
-        return self
-
-    def __init__(self, data):
-        self.data = data
-        self.counter = 0
-
-    def __next__(self):
-        if self.counter < self.data:
-            ret = self.counter
-            self.counter += 1
-            return ret
-        else:
-            raise StopIteration
+        return BoxIteration.IterImpl(self.container)

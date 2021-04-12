@@ -1,41 +1,40 @@
 from Box import Box
 from sys import argv
-from iter import Iteration
+from Iteration import BoxIteration
 
 
-def calculate(data1):
+def calculate(boxes):
     result = []
-    iterator = iter(Iteration(data1))
-    while True:
-        try:
-            c = next(iterator)
-            if :
-            else:
-
-        except StopIteration:
-            break
-
-    # for i in range(len(data1)):
-    #     for j in range(len(data1)):
-    #         if data1[i].checkBoxPair(data1[j]):
-    #             result.append((data1[i], data1[j]))
+    iterator = iter(BoxIteration(boxes))
+    inners = []
+    #index нужен для inners
+    for i in range(len(boxes)):
+            inners.append([])
+            print()
+            for compareBox in BoxIteration(boxes):
+                if compareBox != boxes[i] and boxes[i].checkBoxPair(compareBox):
+                    inners[i].append(compareBox)
+                    print(compareBox)
 
     return result
 
 
-def ReadInFile(data):
-    with open(data, "r") as txt_file:
-        input_data = [Box(int(line.split()[2]), int(line.split()[1]), int(line.split()[0])) for line in txt_file]
-    return input_data
+def read_in_file(path):
+    f = open(path)
+    listOfBoxes = []
+    for line in f:
+        chars = line.split(" ")
+        listOfBoxes.append(Box(int(chars[0]), int(chars[1]), int(chars[2])))
+    return listOfBoxes
 
 
 def main():
     if len(argv) > 1:
-        data = argv[1]
+        path = argv[1]
     else:
-        data = input("Enter file name: ")
-    r = calculate(ReadInFile(data))
-    print(r)
+        path = input("Enter file name: ")
+    calculate(read_in_file(path))
+# print(r)
 
 
 if __name__ == '__main__':
