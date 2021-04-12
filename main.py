@@ -4,7 +4,6 @@ from Iteration import BoxIteration
 
 
 def calculate(boxes):
-    result = []
     iterator = iter(BoxIteration(boxes))
     inners = []
     #index нужен для inners
@@ -16,7 +15,7 @@ def calculate(boxes):
                     inners[i].append(compareBox)
                     print(compareBox)
 
-    return result
+    return inners
 
 
 def read_in_file(path):
